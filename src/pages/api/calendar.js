@@ -1,33 +1,42 @@
-
 import AWS from 'aws-sdk';
+import { getToken } from 'next-auth/jwt';
+import jwt from 'jsonwebtoken';
+import initMiddleware from '@/lib/init-middleware';
 
+// Configure AWS SDK
 AWS.config.update({
   region: process.env.AWS_REGION,
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
+const cors = initMiddleware();
+
+// Secret for JWT decoding, ensure this matches your configuration
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export default async function handler(req, res) {
+  await cors (req, res);
   console.log('API handler reached');
 
   if (req.method === 'GET') {
     try {
-      const { personId } = req.query;
+      // Retrieve token from request
+      const token = await getToken({ req, secret: JWT_SECRET.toString() });
+      console.log('Token:', token);
 
-      if (!personId) {
-        return res.status(400).json({ error: 'Missing personId' });
-      }
+      const personId = token.email;
       console.log('personId is:', personId);
 
+      // Retrieve events from DynamoDB
       const params = {
         TableName: 'WorkSession',
         Key: { personId }
       };
 
       const data = await dynamodb.get(params).promise();
-      console.log('data retrieved:', data);
+      console.log('Data retrieved:', data);
 
       if (!data.Item) {
         return res.status(404).json({ error: 'No events found for this personId' });

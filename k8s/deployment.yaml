@@ -13,7 +13,7 @@ spec:
         app: InternRFC-app-calendar-user
     spec:
       containers:
-      - name: Calendar-uer-container
-        image: 533267283761.dkr.ecr.eu-central-1.amazonaws.com/worksession-user:latest
+      - name: calendar-user-container
+        image: 533267283761.dkr.ecr.eu-central-1.amazonaws.com/worksession-user
         ports:
         - containerPort: 3000

@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: calendar-user-service
 spec:
-  type: NodePort
-  ports:
-  - port: 80
-    targetPort: 3000
-    nodePort: 30001
   selector:
     app: InternRFC-app-calendar-user
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  
+
