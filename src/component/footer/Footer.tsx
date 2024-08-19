@@ -8,7 +8,8 @@ export default function Footer() {
         <div className="relative w-24 h-auto min-h-5">
           <Image
             src="/images/rfclogo.png"
-            fill={true}
+            height={100}
+            width={100}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
             alt="internRFC website logo image."
           />

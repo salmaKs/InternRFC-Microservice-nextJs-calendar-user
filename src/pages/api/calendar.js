@@ -1,7 +1,6 @@
 import AWS from 'aws-sdk';
 import { getToken } from 'next-auth/jwt';
-import jwt from 'jsonwebtoken';
-import initMiddleware from '@/lib/init-middleware';
+
 
 // Configure AWS SDK
 AWS.config.update({
@@ -11,13 +10,13 @@ AWS.config.update({
 });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-const cors = initMiddleware();
+
 
 // Secret for JWT decoding, ensure this matches your configuration
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export default async function handler(req, res) {
-  await cors (req, res);
+
   console.log('API handler reached');
 
   if (req.method === 'GET') {
