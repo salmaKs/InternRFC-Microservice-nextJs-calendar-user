@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: calendar-user-container
-        image: salmak22/calendarimage
+        image: 533267283761.dkr.ecr.eu-central-1.amazonaws.com/worksession-user:latest
         ports:
         - containerPort: 3000

@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <nav className="bg-neutral p-4 flex justify-between items-center">
       <div>
-        <Link href="http://localhost:3001/home" passHref>
+        <Link href="/home" passHref>
           <Button
             leftIcon={<ArrowBackIcon />}
             colorScheme="teal"

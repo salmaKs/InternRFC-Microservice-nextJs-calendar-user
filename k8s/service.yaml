@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: calendar-user-service
 spec:
+  type: LoadBalancer
   selector:
     app: InternRFC-app-calendar-user
   ports:
